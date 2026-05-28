@@ -1,8 +1,76 @@
+import { useState } from "react"
 import { motion } from "framer-motion"
+import emailjs from "@emailjs/browser"
 
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },
   show: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+}
+
+function ContactForm() {
+  const [form, setForm] = useState({ name: "", email: "", message: "" })
+  const [status, setStatus] = useState("")
+
+  const handleSubmit = () => {
+    if (!form.name || !form.email || !form.message) {
+      setStatus("error")
+      return
+    }
+    setStatus("loading")
+    emailjs.send(
+      "service_2xfe7xt",
+      "template_dc9ures",
+      {
+        from_name: form.name,
+        from_email: form.email,
+        message: form.message,
+      },
+      "IUIOlQVV96qroywUD"
+    ).then(() => {
+      setStatus("success")
+      setForm({ name: "", email: "", message: "" })
+    }).catch(() => {
+      setStatus("fail")
+    })
+  }
+
+  return (
+    <div className="max-w-lg mx-auto flex flex-col gap-4">
+      <input
+        type="text"
+        placeholder="Your Name"
+        value={form.name}
+        onChange={(e) => setForm({ ...form, name: e.target.value })}
+        className="bg-white/10 border border-white/20 rounded-xl px-5 py-4 text-white placeholder-gray-500 focus:outline-none focus:border-purple-400 transition"
+      />
+      <input
+        type="email"
+        placeholder="Your Email"
+        value={form.email}
+        onChange={(e) => setForm({ ...form, email: e.target.value })}
+        className="bg-white/10 border border-white/20 rounded-xl px-5 py-4 text-white placeholder-gray-500 focus:outline-none focus:border-purple-400 transition"
+      />
+      <textarea
+        rows={5}
+        placeholder="Your Message"
+        value={form.message}
+        onChange={(e) => setForm({ ...form, message: e.target.value })}
+        className="bg-white/10 border border-white/20 rounded-xl px-5 py-4 text-white placeholder-gray-500 focus:outline-none focus:border-purple-400 transition resize-none"
+      />
+      <motion.button
+        whileHover={{ scale: 1.02 }}
+        whileTap={{ scale: 0.98 }}
+        onClick={handleSubmit}
+        disabled={status === "loading"}
+        className="bg-gradient-to-r from-purple-500 to-blue-500 text-white px-8 py-4 rounded-xl font-semibold hover:opacity-90 transition disabled:opacity-50"
+      >
+        {status === "loading" ? "Sending..." : "Send Message 🚀"}
+      </motion.button>
+      {status === "success" && <p className="text-green-400 text-center">✅ Message sent!</p>}
+      {status === "error" && <p className="text-red-400 text-center">❌ Fill all fields.</p>}
+      {status === "fail" && <p className="text-red-400 text-center">❌ Something went wrong.</p>}
+    </div>
+  )
 }
 
 function App() {
@@ -156,30 +224,7 @@ function App() {
       >
         <h3 className="text-4xl font-bold text-center mb-4">Contact</h3>
         <p className="text-gray-400 text-center mb-12">Have a project in mind? Let's talk.</p>
-        <div className="max-w-lg mx-auto flex flex-col gap-4">
-          <input
-            type="text"
-            placeholder="Your Name"
-            className="bg-white/10 border border-white/20 rounded-xl px-5 py-4 text-white placeholder-gray-500 focus:outline-none focus:border-purple-400 transition"
-          />
-          <input
-            type="email"
-            placeholder="Your Email"
-            className="bg-white/10 border border-white/20 rounded-xl px-5 py-4 text-white placeholder-gray-500 focus:outline-none focus:border-purple-400 transition"
-          />
-          <textarea
-            rows={5}
-            placeholder="Your Message"
-            className="bg-white/10 border border-white/20 rounded-xl px-5 py-4 text-white placeholder-gray-500 focus:outline-none focus:border-purple-400 transition resize-none"
-          />
-          <motion.button
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            className="bg-gradient-to-r from-purple-500 to-blue-500 text-white px-8 py-4 rounded-xl font-semibold hover:opacity-90 transition"
-          >
-            Send Message 🚀
-          </motion.button>
-        </div>
+        <ContactForm />
       </motion.section>
 
       {/* ===== FOOTER ===== */}
