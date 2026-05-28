@@ -95,6 +95,7 @@ function App() {
         >
           <li className="hover:text-white cursor-pointer transition">Home</li>
           <li className="hover:text-white cursor-pointer transition">Projects</li>
+          <li className="hover:text-white cursor-pointer transition">Design</li>
           <li className="hover:text-white cursor-pointer transition">Contact</li>
         </motion.ul>
       </nav>
@@ -114,7 +115,7 @@ function App() {
         >
           React & React Native<br />
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-500">
-            Developer
+            Developer & Designer
           </span>
         </motion.h2>
         <motion.p
@@ -122,8 +123,7 @@ function App() {
           transition={{ delay: 0.3 }}
           className="text-gray-400 max-w-xl mb-8 text-lg"
         >
-          I build modern, fast and responsive web & mobile applications
-          with clean UI and great user experience.
+          I build modern web & mobile apps and create stunning visual designs.
         </motion.p>
         <motion.div
           variants={fadeUp} initial="hidden" animate="show"
@@ -150,12 +150,13 @@ function App() {
         <div className="max-w-lg">
           <h3 className="text-4xl font-bold mb-4">About Me</h3>
           <p className="text-gray-400 leading-relaxed text-lg">
-            I'm a Frontend & Mobile Developer with experience in React and React Native.
-            I focus on building clean, responsive interfaces with great user experience.
+            I'm a Frontend & Mobile Developer and Visual Designer.
+            I build clean, responsive web & mobile apps with React and React Native,
+            and create stunning event posters and social media content.
             Available for freelance projects worldwide.
           </p>
           <div className="flex flex-wrap gap-3 mt-6">
-            {["React", "React Native", "Tailwind CSS", "JavaScript", "Vite", "Git"].map((skill) => (
+            {["React", "React Native", "Tailwind CSS", "JavaScript", "Figma", "Canva", "Git"].map((skill) => (
               <span key={skill} className="bg-white/10 px-4 py-1 rounded-full text-sm text-white border border-white/20">
                 {skill}
               </span>
@@ -170,7 +171,7 @@ function App() {
           variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }}
           className="text-4xl font-bold text-center mb-14"
         >
-          Projects
+          Dev Projects
         </motion.h3>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {[
@@ -217,10 +218,46 @@ function App() {
         </div>
       </section>
 
+      {/* ===== DESIGN WORK ===== */}
+      <section className="px-10 py-24 bg-white/5">
+        <motion.h3
+          variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }}
+          className="text-4xl font-bold text-center mb-4"
+        >
+          Design Work
+        </motion.h3>
+        <motion.p
+          variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }}
+          className="text-gray-400 text-center mb-14"
+        >
+          Event posters & social media content — DevOps ISIMA Club
+        </motion.p>
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+          {[
+            "/designs/poster1.jpg",
+            "/designs/poster2.jpg",
+            "/designs/poster3.jpg",
+            "/designs/poster4.jpg",
+            "/designs/poster5.jpg",
+            "/designs/poster6.jpg",
+          ].map((src, i) => (
+            <motion.div
+              key={i}
+              variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }}
+              transition={{ delay: i * 0.1 }}
+              whileHover={{ scale: 1.05 }}
+              className="rounded-2xl overflow-hidden cursor-pointer"
+            >
+              <img src={src} alt={`design ${i + 1}`} className="w-full h-full object-cover" />
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
       {/* ===== CONTACT ===== */}
       <motion.section
         variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }}
-        className="px-10 py-24 bg-white/5"
+        className="px-10 py-24"
       >
         <h3 className="text-4xl font-bold text-center mb-4">Contact</h3>
         <p className="text-gray-400 text-center mb-12">Have a project in mind? Let's talk.</p>
@@ -229,7 +266,7 @@ function App() {
 
       {/* ===== FOOTER ===== */}
       <footer className="text-center py-8 text-gray-600 text-sm border-t border-white/10">
-        © 2025 Ahmed Moussa — Built with React & Tailwind CSS
+        © 2025 Ahmed Moussa — Developer & Designer
       </footer>
 
     </div>
