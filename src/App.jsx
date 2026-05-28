@@ -234,12 +234,12 @@ function App() {
         </motion.p>
         <div className="grid grid-cols-2 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
           {[
-            "/designs/poster1.jpg",
-            "/designs/poster2.jpg",
-            "/designs/poster3.jpg",
-            "/designs/poster4.jpg",
-            "/designs/poster5.jpg",
-            "/designs/poster6.jpg",
+            "/designs/poster1 (1).jpeg",
+            "/designs/poster1 (2).jpeg",
+            "/designs/poster1 (3).jpeg",
+            "/designs/poster1 (4).jpeg",
+            "/designs/poster1 (5).jpeg",
+            "/designs/poster1 (6).jpeg",
           ].map((src, i) => (
             <motion.div
               key={i}
